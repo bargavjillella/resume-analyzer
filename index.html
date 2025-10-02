@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>AI Resume Analyzer</h1>
+            <p class="subtitle">Optimize Your Resume for Any Job Role</p>
+        </header>
+
+        <!-- Main Input Section -->
+        <main class="main-content">
+            <div class="input-section">
+                <div class="input-grid">
+                    <!-- Job Description Input -->
+                    <div class="input-card">
+                        <div class="card-header">
+                            <h3>Job Description</h3>
+                            <button class="btn btn--outline btn--sm" id="clearJobBtn">Clear</button>
+                        </div>
+                        <div class="card-body">
+                            <textarea 
+                                id="jobDescription" 
+                                class="form-control job-textarea" 
+                                placeholder="Paste the job description here..."
+                                rows="8"
+                            ></textarea>
+                            <div class="character-counter">
+                                <span id="charCount">0</span> characters
+                            </div>
+                            <div class="sample-jobs">
+                                <label class="form-label">Or try a sample:</label>
+                                <select id="sampleJobSelect" class="form-control">
+                                    <option value="">Choose a sample job description</option>
+                                    <option value="software-engineer">Software Engineer</option>
+                                    <option value="data-scientist">Data Scientist</option>
+                                    <option value="frontend-developer">Frontend Developer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume Upload Section -->
+                    <div class="input-card">
+                        <div class="card-header">
+                            <h3>Resume</h3>
+                            <button class="btn btn--outline btn--sm" id="clearResumeBtn">Clear</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="upload-section">
+                                <div class="file-upload-area" id="fileUploadArea">
+                                    <div class="upload-icon">📄</div>
+                                    <p>Drag & drop your resume here</p>
+                                    <p class="file-types">Supports PDF, DOCX, TXT files</p>
+                                    <input type="file" id="fileInput" accept=".pdf,.docx,.txt" hidden>
+                                    <button type="button" class="btn btn--outline" id="browseBtn">Browse Files</button>
+                                </div>
+                                <div class="uploaded-file" id="uploadedFile" style="display: none;">
+                                    <div class="file-info">
+                                        <span class="file-icon">📄</span>
+                                        <span class="file-name" id="fileName"></span>
+                                        <button class="remove-file" id="removeFile">✕</button>
+                                    </div>
+                                </div>
+                                <div class="divider">
+                                    <span>OR</span>
+                                </div>
+                                <textarea 
+                                    id="resumeText" 
+                                    class="form-control resume-textarea" 
+                                    placeholder="Paste your resume text here..."
+                                    rows="8"
+                                ></textarea>
+                                <div class="sample-resumes">
+                                    <label class="form-label">Or try a sample:</label>
+                                    <select id="sampleResumeSelect" class="form-control">
+                                        <option value="">Choose a sample resume</option>
+                                        <option value="john-doe">John Doe - Software Engineer</option>
+                                        <option value="jane-smith">Jane Smith - Data Scientist</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Button -->
+                <div class="analyze-section">
+                    <button id="analyzeBtn" class="btn btn--primary btn--lg analyze-btn" disabled>
+                        <span class="btn-text">Analyze Resume</span>
+                        <div class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <!-- Overall Score -->
+                <div class="score-card">
+                    <div class="score-container">
+                        <div class="circular-progress" id="circularProgress">
+                            <div class="progress-value" id="progressValue">0%</div>
+                        </div>
+                        <div class="score-details">
+                            <h3 id="compatibilityRating">Calculating...</h3>
+                            <p id="scoreDescription">Analyzing your resume match...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Analysis -->
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h4>🎯 Matched Skills</h4>
+                        <div class="skills-container" id="matchedSkills"></div>
+                    </div>
+                    <div class="analysis-card">
+                        <h4>❌ Missing Skills</h4>
+                        <div class="skills-container" id="missingSkills"></div>
+                    </div>
+                    <div class="analysis-card">
+                        <h4>➕ Additional Skills</h4>
+                        <div class="skills-container" id="additionalSkills"></div>
+                    </div>
+                </div>
+
+                <!-- Detailed Recommendations -->
+                <div class="recommendations-grid">
+                    <div class="recommendation-card">
+                        <h4>💡 Resume Improvements</h4>
+                        <ul id="resumeImprovements"></ul>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>🔍 Missing Keywords</h4>
+                        <ul id="missingKeywords"></ul>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>📝 ATS Optimization</h4>
+                        <ul id="atsOptimization"></ul>
+                    </div>
+                </div>
+
+                <!-- Experience Analysis -->
+                <div class="experience-card">
+                    <h4>📊 Experience & Qualifications Analysis</h4>
+                    <div class="experience-details" id="experienceAnalysis"></div>
+                </div>
+
+                <div class="action-items-card">
+                    <h4>✅ Priority Action Items</h4>
+                    <div class="action-items" id="actionItems"></div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
