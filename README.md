@@ -89,10 +89,5 @@ resume-analyzer/
 3. Commit with clear messages.
 4. Open a Pull Request for review.
 
-## ⚖️ License
-
-MIT License (recommended — add a `LICENSE` file).
-
----
 
 *Streamlit-powered, simple to use, and easy to extend.*
